@@ -1,46 +1,39 @@
-# Nostra Spine Reveal
+# Nostra Diagonal Reveal
 
-A static, CSS-only presentation for Nostra's three guiding aspects. Hover, focus, or tap to reveal each sliver of the story.
+A static, CSS-only hero that keeps the Nostra logo front and center while three diagonal slices expand to reveal more context on hover or focus.
 
 ## Structure
 
-- `index.html` — the landing page with the hero, central zig-zag spine, and interactive content pieces.
-- `styles.css` — all layout, motion, and accessibility styling.
-- `assets/` — imagery and brand marks referenced in the layout. Keep existing filenames to avoid broken links.
-- `vercel.json` — deployment preferences for Vercel (clean URLs, no trailing slash).
+- `index.html` — full-screen stage with the logo backdrop and three diagonal slices.
+- `styles.css` — layout, motion, accessibility, and responsive behavior.
+- `assets/` — imagery used for the slices and the logo. Keep filenames the same to avoid broken references.
+- `vercel.json` — deployment settings for Vercel (clean URLs, no trailing slash).
 
-## Updating Copy or Layout
+## Editing Content
 
-All copy lives directly in `index.html`. Update the headings and supporting text inline, then adjust styles if needed in `styles.css`. Maintain the `piece__eyebrow`, heading, paragraph, and figure structure so the hover/tap reveal animation remains intact.
+Each slice has a short eyebrow label and body copy directly inside `index.html`. Update the text inline. Imagery is handled via the `<figure>` markup in each slice.
 
-## Image Management
+## Slide Three Placeholder
 
-Images are expected at:
+If `/assets/slide3.jpg` is not yet available, the third slice shows a gradient tile that reads “Coming soon.”
 
-- `/assets/nostra-logo.webp`
-- `/assets/slide1-plant.png`
-- `/assets/slide2-room.jpg`
-- `/assets/slide3.jpg`
-
-If an asset is not yet available, keep the filename reference in place; the layout will gracefully fall back. Specifically for the third slide, a gradient tile that reads “Coming soon” is shown by default.
-
-To swap from the placeholder to the actual image:
+To switch over once the artwork exists:
 
 1. Add `/assets/slide3.jpg` to the repository.
-2. Open `index.html` and add `class="has-slide3"` to the `<html>` element.
-3. The CSS will automatically hide the placeholder and display the real artwork.
+2. Add `class="has-slide3"` to the `<html>` element in `index.html`.
+3. The CSS automatically hides the placeholder and displays the real image.
 
-## Accessibility & Motion
+## Accessibility & Interaction
 
-- Every piece is focusable and supports keyboard expansion via `:focus-within`.
-- A skip link and visible focus ring are provided.
-- Motion respects the user’s `prefers-reduced-motion` settings.
+- Slices are focusable (`tabindex="0"`) and expose their expanded state on focus, mirroring the hover experience.
+- A skip link is available for keyboard users.
+- Motion respects `prefers-reduced-motion`.
+- On small screens, slices stack vertically and remain expanded for easier reading.
 
 ## Deploying on Vercel
 
-1. Push your changes to GitHub (or another Git provider).
-2. In the Vercel dashboard, import the repository.
-3. For **Framework Preset**, choose **Other**.
-4. Leave the **Build Command** empty and set **Output Directory** to `./`.
-5. Deploy — Vercel will serve the static files as-is.
-
+1. Push the repo to your Git provider.
+2. In Vercel, import the repository.
+3. Choose **Other** for the Framework Preset.
+4. Leave the build command empty and keep the output directory as `./`.
+5. Deploy — Vercel will host the static files as-is.

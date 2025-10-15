@@ -15,72 +15,46 @@
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <a class="sr-only" href="#main">Skip to main content</a>
-  <main id="main" class="container">
-    <header class="hero">
-      <img src="/assets/nostra-logo.webp" alt="Nostra logo" width="220">
-      <p class="hero__tagline">Coordinating sovereign builders through trust, tools, and shared purpose.</p>
-    </header>
-
-    <section class="spine" aria-hidden="true"></section>
-
-    <article class="piece piece--one" tabindex="0">
-      <input type="checkbox" id="piece-one-toggle" class="piece__toggle" aria-hidden="true">
-      <label class="piece__handle" for="piece-one-toggle">
-        <span aria-hidden="true">⟷</span>
-        <span class="sr-only">Toggle Protocol of Agreements panel</span>
-      </label>
-      <div class="piece__surface">
-        <div class="piece__inner">
-          <span class="piece__eyebrow">Aspect 01</span>
-          <h2>Protocol of Agreements</h2>
+  <a class="sr-only" href="#content">Skip to slices</a>
+  <main id="content" class="stage" aria-label="Nostra key ideas">
+    <div class="logo-backdrop">
+      <img src="/assets/nostra-logo.webp" alt="Nostra logo">
+    </div>
+    <section class="slices" aria-label="Explore the three pillars">
+      <article class="slice slice--one" tabindex="0">
+        <figure class="slice__image">
+          <img src="/assets/slide1-plant.png" alt="Hands exchanging a plant" loading="lazy">
+        </figure>
+        <div class="slice__scrim"></div>
+        <div class="slice__content">
+          <span class="slice__eyebrow">Protocol of Agreements</span>
           <p>Voluntary, binding commitments with transparent guarantees.</p>
-          <figure>
-            <img src="/assets/slide1-plant.png" alt="Hands exchanging a plant" loading="lazy">
-          </figure>
         </div>
-      </div>
-    </article>
-
-    <article class="piece piece--two" tabindex="0">
-      <input type="checkbox" id="piece-two-toggle" class="piece__toggle" aria-hidden="true">
-      <label class="piece__handle" for="piece-two-toggle">
-        <span aria-hidden="true">⟷</span>
-        <span class="sr-only">Toggle Agizens and Coordination panel</span>
-      </label>
-      <div class="piece__surface">
-        <div class="piece__inner">
-          <span class="piece__eyebrow">Aspect 02</span>
-          <h2>Agizens &amp; Coordination</h2>
+      </article>
+      <article class="slice slice--two" tabindex="0">
+        <figure class="slice__image">
+          <img src="/assets/slide2-room.jpg" alt="Communal gathering room" loading="lazy">
+        </figure>
+        <div class="slice__scrim"></div>
+        <div class="slice__content">
+          <span class="slice__eyebrow">Agizens &amp; Coordination</span>
           <p>Human + AI citizens collaborating with accountable autonomy.</p>
-          <figure>
-            <img src="/assets/slide2-room.jpg" alt="Warm communal room" loading="lazy">
-          </figure>
         </div>
-      </div>
-    </article>
-
-    <article class="piece piece--three" tabindex="0">
-      <input type="checkbox" id="piece-three-toggle" class="piece__toggle" aria-hidden="true">
-      <label class="piece__handle" for="piece-three-toggle">
-        <span aria-hidden="true">⟷</span>
-        <span class="sr-only">Toggle Economic Engine panel</span>
-      </label>
-      <div class="piece__surface">
-        <div class="piece__inner">
-          <span class="piece__eyebrow">Aspect 03</span>
-          <h2>Economic Engine</h2>
+      </article>
+      <article class="slice slice--three" tabindex="0">
+        <figure class="slice__image">
+          <div class="placeholder" role="img" aria-label="Economic engine visual coming soon">Coming soon</div>
+          <!-- Once the real artwork is available, add class="has-slide3" to the <html> element so the placeholder hides and the image below appears. -->
+          <img src="/assets/slide3.jpg" alt="Economic engine visual" loading="lazy">
+        </figure>
+        <div class="slice__scrim"></div>
+        <div class="slice__content">
+          <span class="slice__eyebrow">Economic Engine</span>
           <p>Energy-in, value-out—tools that fund the future we’re building.</p>
-          <figure>
-            <div class="placeholder" role="img" aria-label="Economic engine visual coming soon">Coming soon</div>
-            <!-- Once the real artwork is available, add class="has-slide3" to the &lt;html&gt; element so the placeholder hides and the image below appears. -->
-            <img src="/assets/slide3.jpg" alt="Economic engine visual" loading="lazy">
-          </figure>
         </div>
-      </div>
-    </article>
+      </article>
+    </section>
   </main>
-
   <footer class="site-footer">
     <small>© 2024 Nostra. <a href="mailto:hello@nostra.network">hello@nostra.network</a></small>
   </footer>
