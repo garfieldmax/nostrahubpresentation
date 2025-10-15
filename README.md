@@ -1,58 +1,46 @@
-# Nostra Static Reveal
+# Nostra Spine Reveal
 
-A single-page, solarpunk-inspired landing experience for Nostra that highlights three coordinated pillars with responsive, CSS-only interactivity.
+A static, CSS-only presentation for Nostra's three guiding aspects. Hover, focus, or tap to reveal each sliver of the story.
 
-## Project structure
+## Structure
 
-```
-/
-├─ assets/
-│  ├─ nostra-logo.webp
-│  ├─ slide1-plant.png
-│  ├─ slide2-room.jpg
-│  └─ slide3.jpg          # optional, see below
-├─ index.html
-├─ styles.css
-└─ vercel.json
-```
+- `index.html` — the landing page with the hero, central zig-zag spine, and interactive content pieces.
+- `styles.css` — all layout, motion, and accessibility styling.
+- `assets/` — imagery and brand marks referenced in the layout. Keep existing filenames to avoid broken links.
+- `vercel.json` — deployment preferences for Vercel (clean URLs, no trailing slash).
 
-## Adding your assets
+## Updating Copy or Layout
 
-1. Place the provided images in the `/assets` directory using these exact filenames:
-   - `nostra-logo.webp`
-   - `slide1-plant.png`
-   - `slide2-room.jpg`
-2. When you have artwork for the third slide, drop it in as `/assets/slide3.jpg`.
+All copy lives directly in `index.html`. Update the headings and supporting text inline, then adjust styles if needed in `styles.css`. Maintain the `piece__eyebrow`, heading, paragraph, and figure structure so the hover/tap reveal animation remains intact.
 
-The third panel ships with a gradient “Coming soon” placeholder. Once you add the real `slide3.jpg`, edit the opening tag of `index.html` from:
+## Image Management
 
-```html
-<html lang="en">
-```
+Images are expected at:
 
-to:
+- `/assets/nostra-logo.webp`
+- `/assets/slide1-plant.png`
+- `/assets/slide2-room.jpg`
+- `/assets/slide3.jpg`
 
-```html
-<html lang="en" class="has-slide3">
-```
+If an asset is not yet available, keep the filename reference in place; the layout will gracefully fall back. Specifically for the third slide, a gradient tile that reads “Coming soon” is shown by default.
 
-That single class tells the CSS to hide the placeholder and reveal your new image automatically—no other changes needed.
+To swap from the placeholder to the actual image:
 
-## Customizing copy
+1. Add `/assets/slide3.jpg` to the repository.
+2. Open `index.html` and add `class="has-slide3"` to the `<html>` element.
+3. The CSS will automatically hide the placeholder and display the real artwork.
 
-Each pillar is defined inside `index.html` within an `<article class="piece">`. Update the headings and paragraphs directly in those blocks. The solarpunk palette and typography can be tuned inside the CSS variables at the top of `styles.css`.
+## Accessibility & Motion
 
-## Deployment
+- Every piece is focusable and supports keyboard expansion via `:focus-within`.
+- A skip link and visible focus ring are provided.
+- Motion respects the user’s `prefers-reduced-motion` settings.
 
-This site is fully static, so deploying to Vercel is straightforward:
+## Deploying on Vercel
 
-1. **GitHub flow**: push this folder to a repository and import it at [vercel.com/new](https://vercel.com/new). Vercel auto-detects static sites and deploys immediately.
-2. **CLI flow**: install the Vercel CLI (`npm i -g vercel`), authenticate, and run:
+1. Push your changes to GitHub (or another Git provider).
+2. In the Vercel dashboard, import the repository.
+3. For **Framework Preset**, choose **Other**.
+4. Leave the **Build Command** empty and set **Output Directory** to `./`.
+5. Deploy — Vercel will serve the static files as-is.
 
-   ```bash
-   vercel deploy
-   ```
-
-   Vercel will build and host the static files without additional configuration. The included `vercel.json` simply enables clean URLs.
-
-Enjoy exploring Nostra’s pillars with smooth, motion-conscious interactions across desktop and mobile.

@@ -5,67 +5,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Nostra — Coordinating Sovereign Builders</title>
   <meta name="description" content="Three core ideas of Nostra, revealed as you explore.">
-  <link rel="preload" as="image" href="/assets/nostra-logo.webp">
+  <meta property="og:title" content="Nostra — Coordinating Sovereign Builders">
+  <meta property="og:description" content="Three core ideas of Nostra, revealed as you explore.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nostra.vercel.app/">
+  <meta property="og:image" content="https://nostra.vercel.app/assets/nostra-logo.webp">
+  <link rel="preload" href="/assets/nostra-logo.webp" as="image" type="image/webp">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%231aa0e6'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='sans-serif' font-size='32' fill='white'%3EN%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <main class="container">
+  <a class="sr-only" href="#main">Skip to main content</a>
+  <main id="main" class="container">
     <header class="hero">
-      <img class="hero__logo" src="/assets/nostra-logo.webp" alt="Nostra logo">
-      <p class="hero__tagline">Coordinating sovereign builders with solarpunk optimism.</p>
+      <img src="/assets/nostra-logo.webp" alt="Nostra logo" width="220">
+      <p class="hero__tagline">Coordinating sovereign builders through trust, tools, and shared purpose.</p>
     </header>
 
     <section class="spine" aria-hidden="true"></section>
 
     <article class="piece piece--one" tabindex="0">
-      <input class="piece__toggle" type="checkbox" id="piece-one" aria-hidden="true">
-      <label class="piece__label" for="piece-one">
-        <span class="piece__label-hint">Tap to open ⟷</span>
-        <span class="sr-only">Toggle Protocol of Agreements</span>
+      <input type="checkbox" id="piece-one-toggle" class="piece__toggle" aria-hidden="true">
+      <label class="piece__handle" for="piece-one-toggle">
+        <span aria-hidden="true">⟷</span>
+        <span class="sr-only">Toggle Protocol of Agreements panel</span>
       </label>
-      <div class="piece__inner">
-        <span class="piece__eyebrow">Protocol of Agreements</span>
-        <h2>Voluntary, binding commitments</h2>
-        <p>Transparent guarantees that align intent with action, supporting trusted collaboration across worlds.</p>
-        <figure class="piece__media">
-          <img src="/assets/slide1-plant.png" alt="Human and robotic collaboration around a growing plant">
-        </figure>
+      <div class="piece__surface">
+        <div class="piece__inner">
+          <span class="piece__eyebrow">Aspect 01</span>
+          <h2>Protocol of Agreements</h2>
+          <p>Voluntary, binding commitments with transparent guarantees.</p>
+          <figure>
+            <img src="/assets/slide1-plant.png" alt="Hands exchanging a plant" loading="lazy">
+          </figure>
+        </div>
       </div>
     </article>
 
     <article class="piece piece--two" tabindex="0">
-      <input class="piece__toggle" type="checkbox" id="piece-two" aria-hidden="true">
-      <label class="piece__label" for="piece-two">
-        <span class="piece__label-hint">Tap to open ⟷</span>
-        <span class="sr-only">Toggle Agizens &amp; Coordination</span>
+      <input type="checkbox" id="piece-two-toggle" class="piece__toggle" aria-hidden="true">
+      <label class="piece__handle" for="piece-two-toggle">
+        <span aria-hidden="true">⟷</span>
+        <span class="sr-only">Toggle Agizens and Coordination panel</span>
       </label>
-      <div class="piece__inner">
-        <span class="piece__eyebrow">Agizens &amp; Coordination</span>
-        <h2>Accountable autonomy together</h2>
-        <p>Human and AI citizens weaving resilient networks of care, craft, and collective intelligence.</p>
-        <figure class="piece__media">
-          <img src="/assets/slide2-room.jpg" alt="People and a helpful robot preparing food together">
-        </figure>
+      <div class="piece__surface">
+        <div class="piece__inner">
+          <span class="piece__eyebrow">Aspect 02</span>
+          <h2>Agizens &amp; Coordination</h2>
+          <p>Human + AI citizens collaborating with accountable autonomy.</p>
+          <figure>
+            <img src="/assets/slide2-room.jpg" alt="Warm communal room" loading="lazy">
+          </figure>
+        </div>
       </div>
     </article>
 
     <article class="piece piece--three" tabindex="0">
-      <input class="piece__toggle" type="checkbox" id="piece-three" aria-hidden="true">
-      <label class="piece__label" for="piece-three">
-        <span class="piece__label-hint">Tap to open ⟷</span>
-        <span class="sr-only">Toggle Economic Engine</span>
+      <input type="checkbox" id="piece-three-toggle" class="piece__toggle" aria-hidden="true">
+      <label class="piece__handle" for="piece-three-toggle">
+        <span aria-hidden="true">⟷</span>
+        <span class="sr-only">Toggle Economic Engine panel</span>
       </label>
-      <div class="piece__inner">
-        <span class="piece__eyebrow">Economic Engine</span>
-        <h2>Fueling futures worth living</h2>
-        <p>Energy-in, value-out systems funding regenerative infrastructure and the communities stewarding it.</p>
-        <figure class="piece__media">
-          <div class="piece__placeholder" aria-hidden="true">Coming soon</div>
-          <!-- Add the class "has-slide3" to the <html> element once /assets/slide3.jpg is available. -->
-          <img class="piece__image" src="/assets/slide3.jpg" alt="Economic engine visual">
-        </figure>
+      <div class="piece__surface">
+        <div class="piece__inner">
+          <span class="piece__eyebrow">Aspect 03</span>
+          <h2>Economic Engine</h2>
+          <p>Energy-in, value-out—tools that fund the future we’re building.</p>
+          <figure>
+            <div class="placeholder" role="img" aria-label="Economic engine visual coming soon">Coming soon</div>
+            <!-- Once the real artwork is available, add class="has-slide3" to the &lt;html&gt; element so the placeholder hides and the image below appears. -->
+            <img src="/assets/slide3.jpg" alt="Economic engine visual" loading="lazy">
+          </figure>
+        </div>
       </div>
     </article>
   </main>
+
+  <footer class="site-footer">
+    <small>© 2024 Nostra. <a href="mailto:hello@nostra.network">hello@nostra.network</a></small>
+  </footer>
 </body>
 </html>
