@@ -144,30 +144,10 @@ img {
   transition: opacity var(--t-med) var(--easing);
 }
 
-.slice__image img,
-.slice__image .placeholder {
+.slice__image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.slice__image .placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, rgba(26, 160, 230, 0.8), rgba(16, 185, 129, 0.8));
-  color: #ffffff;
-  letter-spacing: 0.18em;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-html:not(.has-slide3) .slice--three img {
-  display: none;
-}
-
-html.has-slide3 .slice--three .placeholder {
-  display: none;
 }
 
 .slice__scrim {
