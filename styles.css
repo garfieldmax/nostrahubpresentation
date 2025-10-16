@@ -312,10 +312,12 @@ img {
     position: relative;
     flex: 1 1 auto;
     display: grid;
+    min-height: clamp(320px, 60vh, 540px);
   }
 
   .slices .slice {
     display: none;
+    min-height: 100%;
   }
 
   .slices .slice:first-of-type {
