@@ -43,7 +43,8 @@
       </article>
       <article class="slice slice--three" tabindex="0" data-slice="three">
         <figure class="slice__image">
-           <img src="/assets/slide3-engine.webp" alt="Economic engine visual" loading="lazy">
+          <img src="/assets/slide3-engine.webp" alt="Economic engine visual" loading="lazy">
+          <div class="placeholder" aria-hidden="true">Economic Engine</div>
         </figure>
         <div class="slice__scrim"></div>
         <div class="slice__content">
@@ -61,6 +62,7 @@
       const root = document.documentElement;
       const slices = Array.from(document.querySelectorAll('.slice'));
       const container = document.querySelector('.slices');
+      const thirdImage = document.querySelector('.slice--three img');
 
       function activateSlice(id) {
         if (id) {
@@ -68,6 +70,10 @@
         } else {
           root.removeAttribute('data-active-slice');
         }
+      }
+
+      function markThirdLoaded() {
+        root.classList.add('has-slide3');
       }
 
       slices.forEach((slice) => {
@@ -85,6 +91,18 @@
       });
 
       container?.addEventListener('mouseleave', () => activateSlice(null));
+
+      if (thirdImage) {
+        if (thirdImage.complete && thirdImage.naturalWidth > 0) {
+          markThirdLoaded();
+        } else {
+          thirdImage.addEventListener('load', markThirdLoaded, { once: true });
+        }
+
+        thirdImage.addEventListener('error', () => {
+          root.classList.remove('has-slide3');
+        });
+      }
     })();
   </script>
 </body>
