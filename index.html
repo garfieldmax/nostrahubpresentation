@@ -156,9 +156,11 @@
         item.addEventListener('click', () => {
           toggleSlice(id);
 
-          const slice = document.querySelector(`.slice[data-slice="${id}"]`);
-          if (slice && typeof slice.scrollIntoView === 'function') {
-            slice.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          if (!isCoarsePointer) {
+            const slice = document.querySelector(`.slice[data-slice="${id}"]`);
+            if (slice && typeof slice.scrollIntoView === 'function') {
+              slice.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
           }
         });
       });
@@ -169,12 +171,28 @@
         }
       });
 
+      container?.addEventListener('click', (event) => {
+        if (!isCoarsePointer) {
+          return;
+        }
+
+        if (!event.target.closest('.slice')) {
+          activateSlice(null);
+        }
+      });
+
       document.addEventListener('click', (event) => {
         if (!isCoarsePointer) {
           return;
         }
 
         if (!event.target.closest('.slice') && !event.target.closest('.mobile-slice-menu')) {
+          activateSlice(null);
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
           activateSlice(null);
         }
       });
