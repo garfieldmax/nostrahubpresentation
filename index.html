@@ -61,6 +61,9 @@
       const root = document.documentElement;
       const slices = Array.from(document.querySelectorAll('.slice'));
       const container = document.querySelector('.slices');
+      const coarseQuery = window.matchMedia('(pointer: coarse)');
+      let isCoarsePointer = coarseQuery.matches;
+      let activeSliceId = null;
 
       function activateSlice(id) {
         if (id) {
@@ -68,12 +71,40 @@
         } else {
           root.removeAttribute('data-active-slice');
         }
+        activeSliceId = id || null;
+      }
+
+      function toggleSlice(id) {
+        if (activeSliceId === id) {
+          activateSlice(null);
+        } else {
+          activateSlice(id);
+        }
+      }
+
+      function handleCoarseChange(event) {
+        isCoarsePointer = event.matches;
+        if (!isCoarsePointer) {
+          activateSlice(null);
+        }
+      }
+
+      if (typeof coarseQuery.addEventListener === 'function') {
+        coarseQuery.addEventListener('change', handleCoarseChange);
+      } else if (typeof coarseQuery.addListener === 'function') {
+        coarseQuery.addListener(handleCoarseChange);
       }
 
       slices.forEach((slice) => {
         const id = slice.dataset.slice;
+
         slice.addEventListener('mouseenter', () => activateSlice(id));
-        slice.addEventListener('mouseleave', () => activateSlice(null));
+        slice.addEventListener('mouseleave', () => {
+          if (!isCoarsePointer) {
+            activateSlice(null);
+          }
+        });
+
         slice.addEventListener('focus', () => activateSlice(id));
         slice.addEventListener('blur', () => {
           requestAnimationFrame(() => {
@@ -82,9 +113,36 @@
             }
           });
         });
+
+        slice.addEventListener('click', (event) => {
+          if (!isCoarsePointer) {
+            return;
+          }
+
+          if (event.detail === 0) {
+            activateSlice(id);
+            return;
+          }
+
+          toggleSlice(id);
+        });
       });
 
-      container?.addEventListener('mouseleave', () => activateSlice(null));
+      container?.addEventListener('mouseleave', () => {
+        if (!isCoarsePointer) {
+          activateSlice(null);
+        }
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!isCoarsePointer) {
+          return;
+        }
+
+        if (!event.target.closest('.slice')) {
+          activateSlice(null);
+        }
+      });
     })();
   </script>
 </body>
