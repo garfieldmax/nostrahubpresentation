@@ -327,6 +327,7 @@ img {
     pointer-events: none;
     z-index: 5;
     isolation: isolate;
+    overflow-y: auto;
   }
 
   .slices::before {
@@ -348,6 +349,7 @@ img {
     min-height: auto;
     width: min(100%, 480px);
     max-height: min(78vh, 560px);
+    height: min(78vh, 560px);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     overflow: hidden;
