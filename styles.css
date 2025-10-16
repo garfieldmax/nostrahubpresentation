@@ -198,6 +198,11 @@ img {
   clip-path: polygon(34% 0, 100% 0, 100% 100%, 10% 100%);
 }
 
+.slice--three .slice__content {
+  align-items: flex-end;
+  text-align: right;
+}
+
 .slice:focus-visible {
   outline: 4px solid rgba(26, 160, 230, 0.8);
   outline-offset: -8px;
