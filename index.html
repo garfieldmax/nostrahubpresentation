@@ -20,6 +20,17 @@
     <div class="logo-backdrop">
       <img src="/assets/nostra-only.png" alt="Nostra logo">
     </div>
+    <nav class="mobile-slice-menu" aria-label="Slide menu">
+      <button type="button" class="mobile-slice-menu__item" data-slice-target="one" aria-pressed="false">
+        <span class="slice__eyebrow">Protocol</span>
+      </button>
+      <button type="button" class="mobile-slice-menu__item" data-slice-target="two" aria-pressed="false">
+        <span class="slice__eyebrow">Agizens</span>
+      </button>
+      <button type="button" class="mobile-slice-menu__item" data-slice-target="three" aria-pressed="false">
+        <span class="slice__eyebrow">Engine</span>
+      </button>
+    </nav>
     <section class="slices" aria-label="Explore the three pillars">
       <article class="slice slice--one" tabindex="0" data-slice="one">
         <figure class="slice__image">
@@ -60,6 +71,7 @@
     (function () {
       const root = document.documentElement;
       const slices = Array.from(document.querySelectorAll('.slice'));
+      const menuItems = Array.from(document.querySelectorAll('.mobile-slice-menu__item'));
       const container = document.querySelector('.slices');
       const coarseQuery = window.matchMedia('(pointer: coarse)');
       let isCoarsePointer = coarseQuery.matches;
@@ -72,6 +84,12 @@
           root.removeAttribute('data-active-slice');
         }
         activeSliceId = id || null;
+
+        menuItems.forEach((item) => {
+          const isActive = item.dataset.sliceTarget === id;
+          item.classList.toggle('is-active', isActive);
+          item.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
       }
 
       function toggleSlice(id) {
@@ -125,6 +143,19 @@
           }
 
           toggleSlice(id);
+        });
+      });
+
+      menuItems.forEach((item) => {
+        const id = item.dataset.sliceTarget;
+
+        item.addEventListener('click', () => {
+          toggleSlice(id);
+
+          const slice = document.querySelector(`.slice[data-slice="${id}"]`);
+          if (slice && typeof slice.scrollIntoView === 'function') {
+            slice.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
         });
       });
 
