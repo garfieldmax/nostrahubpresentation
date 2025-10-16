@@ -21,7 +21,7 @@
       <img src="/assets/nostra-logo.webp" alt="Nostra logo">
     </div>
     <section class="slices" aria-label="Explore the three pillars">
-      <article class="slice slice--one" tabindex="0">
+      <article class="slice slice--one" tabindex="0" data-slice="one">
         <figure class="slice__image">
           <img src="/assets/slide1-plant.png" alt="Hands exchanging a plant" loading="lazy">
         </figure>
@@ -31,7 +31,7 @@
           <p>Voluntary, binding commitments with transparent guarantees.</p>
         </div>
       </article>
-      <article class="slice slice--two" tabindex="0">
+      <article class="slice slice--two" tabindex="0" data-slice="two">
         <figure class="slice__image">
           <img src="/assets/slide2-room.jpg" alt="Communal gathering room" loading="lazy">
         </figure>
@@ -41,7 +41,7 @@
           <p>Human + AI citizens collaborating with accountable autonomy.</p>
         </div>
       </article>
-      <article class="slice slice--three" tabindex="0">
+      <article class="slice slice--three" tabindex="0" data-slice="three">
         <figure class="slice__image">
            <img src="/assets/slide3-engine.webp" alt="Economic engine visual" loading="lazy">
         </figure>
@@ -56,5 +56,36 @@
   <footer class="site-footer">
     <small>© 2024 Nostra. <a href="mailto:maxb@nostrahub.com">maxb@nostrahub.com</a></small>
   </footer>
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const slices = Array.from(document.querySelectorAll('.slice'));
+      const container = document.querySelector('.slices');
+
+      function activateSlice(id) {
+        if (id) {
+          root.setAttribute('data-active-slice', id);
+        } else {
+          root.removeAttribute('data-active-slice');
+        }
+      }
+
+      slices.forEach((slice) => {
+        const id = slice.dataset.slice;
+        slice.addEventListener('mouseenter', () => activateSlice(id));
+        slice.addEventListener('mouseleave', () => activateSlice(null));
+        slice.addEventListener('focus', () => activateSlice(id));
+        slice.addEventListener('blur', () => {
+          requestAnimationFrame(() => {
+            if (!slices.some((item) => item.matches(':focus'))) {
+              activateSlice(null);
+            }
+          });
+        });
+      });
+
+      container?.addEventListener('mouseleave', () => activateSlice(null));
+    })();
+  </script>
 </body>
 </html>
