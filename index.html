@@ -20,6 +20,17 @@
     <div class="logo-backdrop">
       <img src="/assets/nostra-only.png" alt="Nostra logo">
     </div>
+    <nav class="mobile-slice-menu" aria-label="Slide menu">
+      <button type="button" class="mobile-slice-menu__item" data-slice-target="one" aria-pressed="false">
+        <span class="slice__eyebrow">Protocol</span>
+      </button>
+      <button type="button" class="mobile-slice-menu__item" data-slice-target="two" aria-pressed="false">
+        <span class="slice__eyebrow">Agizens</span>
+      </button>
+      <button type="button" class="mobile-slice-menu__item" data-slice-target="three" aria-pressed="false">
+        <span class="slice__eyebrow">Engine</span>
+      </button>
+    </nav>
     <section class="slices" aria-label="Explore the three pillars">
       <article class="slice slice--one" tabindex="0" data-slice="one">
         <figure class="slice__image">
@@ -60,7 +71,11 @@
     (function () {
       const root = document.documentElement;
       const slices = Array.from(document.querySelectorAll('.slice'));
+      const menuItems = Array.from(document.querySelectorAll('.mobile-slice-menu__item'));
       const container = document.querySelector('.slices');
+      const coarseQuery = window.matchMedia('(pointer: coarse)');
+      let isCoarsePointer = coarseQuery.matches;
+      let activeSliceId = null;
 
       function activateSlice(id) {
         if (id) {
@@ -68,12 +83,46 @@
         } else {
           root.removeAttribute('data-active-slice');
         }
+        activeSliceId = id || null;
+
+        menuItems.forEach((item) => {
+          const isActive = item.dataset.sliceTarget === id;
+          item.classList.toggle('is-active', isActive);
+          item.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+      }
+
+      function toggleSlice(id) {
+        if (activeSliceId === id) {
+          activateSlice(null);
+        } else {
+          activateSlice(id);
+        }
+      }
+
+      function handleCoarseChange(event) {
+        isCoarsePointer = event.matches;
+        if (!isCoarsePointer) {
+          activateSlice(null);
+        }
+      }
+
+      if (typeof coarseQuery.addEventListener === 'function') {
+        coarseQuery.addEventListener('change', handleCoarseChange);
+      } else if (typeof coarseQuery.addListener === 'function') {
+        coarseQuery.addListener(handleCoarseChange);
       }
 
       slices.forEach((slice) => {
         const id = slice.dataset.slice;
+
         slice.addEventListener('mouseenter', () => activateSlice(id));
-        slice.addEventListener('mouseleave', () => activateSlice(null));
+        slice.addEventListener('mouseleave', () => {
+          if (!isCoarsePointer) {
+            activateSlice(null);
+          }
+        });
+
         slice.addEventListener('focus', () => activateSlice(id));
         slice.addEventListener('blur', () => {
           requestAnimationFrame(() => {
@@ -82,9 +131,49 @@
             }
           });
         });
+
+        slice.addEventListener('click', (event) => {
+          if (!isCoarsePointer) {
+            return;
+          }
+
+          if (event.detail === 0) {
+            activateSlice(id);
+            return;
+          }
+
+          toggleSlice(id);
+        });
       });
 
-      container?.addEventListener('mouseleave', () => activateSlice(null));
+      menuItems.forEach((item) => {
+        const id = item.dataset.sliceTarget;
+
+        item.addEventListener('click', () => {
+          toggleSlice(id);
+
+          const slice = document.querySelector(`.slice[data-slice="${id}"]`);
+          if (slice && typeof slice.scrollIntoView === 'function') {
+            slice.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        });
+      });
+
+      container?.addEventListener('mouseleave', () => {
+        if (!isCoarsePointer) {
+          activateSlice(null);
+        }
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!isCoarsePointer) {
+          return;
+        }
+
+        if (!event.target.closest('.slice')) {
+          activateSlice(null);
+        }
+      });
     })();
   </script>
 </body>
