@@ -94,6 +94,10 @@
 
       function toggleSlice(id) {
         if (activeSliceId === id) {
+          if (isCoarsePointer) {
+            return;
+          }
+
           activateSlice(null);
         } else {
           activateSlice(id);
@@ -170,7 +174,7 @@
           return;
         }
 
-        if (!event.target.closest('.slice')) {
+        if (!event.target.closest('.slice') && !event.target.closest('.mobile-slice-menu')) {
           activateSlice(null);
         }
       });
